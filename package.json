@@ -4,8 +4,38 @@
   "description": "> A Project created with carbon react components, react hooks and **Node.js** in backend.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js --exec babel-node --presets es2015,stage-2"
   },
-  "author": "",
-  "license": "ISC"
+  "keywords": [
+    "nodeJs",
+    "JavaScript",
+    "Express"
+  ],
+  "engines": {
+    "node": "^8.9.4",
+    "npm": "^5.6.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "browser-sync": "^2.26.5",
+    "eslint": "^7.5.0",
+    "eslint-plugin-import": "^2.22.0",
+    "module-alias": "^2.2.2",
+    "nodemon": "^2.0.4"
+  },
+  "author": "Saif <saif.pirjade@gmail.com>",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "http": "0.0.1-security",
+    "path": "^0.12.7"
+  }
 }
