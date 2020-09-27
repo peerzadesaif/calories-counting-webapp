@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 import UsersController from "../app/controllers/UsersController";
 
-router.route("/user/login").get(UsersController.Login);
+router.route("/user/login").post(UsersController.Login);
 
 router.route("/user/register").post(UsersController.Register);
 
