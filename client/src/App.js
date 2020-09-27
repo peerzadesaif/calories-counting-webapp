@@ -18,7 +18,7 @@ const App = () => {
   useEffect(() => {
     // Update the document title using the browser API
     history.listen((location, action) => {
-      whiteList.includes(`${location.pathname}`) ? undefined : !Cookies.get("RCLOREHASH") ? history.push('/') : undefined
+      whiteList.includes(`${location.pathname}`) ? undefined : !Cookies.get("CLCNWAHASH") ? history.push('/') : undefined
     });
   });
 
