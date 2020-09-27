@@ -5,7 +5,7 @@ export const environment = "development";
 export const SERVICE_NAME = "user-platform";
 export const runClusterServer = false;
 
-export const mongodb = { uri: "mongodb+srv://saif:7w368PfqUrC98zV@cluster0.phoss.mongodb.net/Cluster0?retryWrites=true&w=majority" };
+export const mongodb = { uri: "mongodb://saif:M7vTiI7nRIJd@ds055905.mlab.com:55905/calories-counting-webapp" };
 
 
 export const options = {

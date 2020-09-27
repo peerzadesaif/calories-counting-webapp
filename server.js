@@ -15,6 +15,9 @@ import terminate from "./terminate";
 const app = express();
 const server = http.createServer(app);
 
+// Connect MongoDB Database
+require('./mongoClient').default(app);
+
 app.set("port", process.env.PORT || port);
 
 app.use(express.static(path.join(__dirname, "public"), { maxage: "7d" }));
