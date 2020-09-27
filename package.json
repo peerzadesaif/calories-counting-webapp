@@ -1,0 +1,11 @@
+{
+  "name": "calories-counting-webapp",
+  "version": "1.0.0",
+  "description": "> A Project created with carbon react components, react hooks and **Node.js** in backend.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
