@@ -1,11 +1,25 @@
 {
-  "name": "my-app",
+  "name": "my-client-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "carbon-components": "^10.20.0",
+    "carbon-components-react": "^7.20.0",
+    "carbon-icons": "^7.0.7",
+    "connected-react-router": "^6.8.0",
+    "history": "^4.10.1",
+    "js-cookie": "^2.2.1",
+    "mobx": "^5.15.7",
+    "mobx-react": "^6.3.0",
     "react": "^16.13.1",
+    "react-addons-css-transition-group": "^15.6.2",
     "react-dom": "^16.13.1",
-    "react-scripts": "0.9.x"
+    "react-redux": "^7.2.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "0.9.x",
+    "react-transition-group": "^4.4.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {},
   "scripts": {
