@@ -5,11 +5,16 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const http = require("http");
 const path = require("path");
+const chalk = require("chalk");
+const morgan = require("morgan");
 
 
 // USE CUSTOM MODULES
 import * as constant from "./app/helpers/constant";
 const port = constant.config.port || 9001;
+import LoggingService from "./app/services/LoggingService";
+import ResponseService from "./app/services/ResponseService";
+import ErrorService from "./app/services/ErrorService";
 import terminate from "./terminate";
 
 const app = express();
@@ -30,6 +35,9 @@ app.use(bodyParser.json({ limit: "500mb" }));
 app.use(bodyParser.urlencoded({ extended: false, limit: "500mb" }));
 app.use(cookieParser('Secret_LOL'));
 
+morgan.token("process-ip", function (req) { return req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"] || req.headers["x-real-ip"] || req.ip || "" });
+app.use(morgan(':process-ip - :date - ":method :url HTTP/:http-version" - :status - :res[content-length] - :response-time ms', { stream: { write: function (msg) { return LoggingService.consoleLog("MORGAN", msg) } } }));
+
 app.use(function (req, res, next) {
     req.app.set('title', 'working')
     console.log('object :>> ');
@@ -41,12 +49,15 @@ require('./routes').default(app);
 
 // SIMPLE TESTING
 app.get("/", function (req, res) {
-    res.json({ status: false, message: 'Testing /' })
+
+    throw new ErrorService(200, 'Successfully')
 });
 
 app.get("*", function (req, res) {
-    res.json({ status: false, message: 'Testing' })
+    throw new ErrorService(202, constant.RESPONSE_MESSAGES.CODE_404)
 });
+
+app.use(ResponseService.handleError)
 
 /**
  * unhandledRejection: Emitted when a Promises rejected and no handler is attached to the promise
@@ -55,7 +66,7 @@ app.get("*", function (req, res) {
  * SIGINT: It's emitted when the process is interrupted (^C)
  */
 const exitHandler = terminate(server, { coredump: false, timeout: 500 });
-process.on('beforeExit', code => { console.log("SERVER_PROCESS_ERROR", `Process will exit with code ${String(code)}`); setTimeout(() => process.exit(code), 100) });
+process.on('beforeExit', code => { LoggingService.consoleLog("SERVER_PROCESS_ERROR", `Process will exit with code ${String(code)}`); setTimeout(() => process.exit(code), 100) });
 process.on("unhandledRejection", exitHandler(1, 'Unhandled Promise'))
 process.on("uncaughtException", exitHandler(1, 'Unexcepted Error'))
 process.on("SIGTERM", exitHandler(0, 'SIGTERM'))
@@ -86,7 +97,7 @@ const onError = (error) => {
 const onListening = () => {
     let addr = server.address();
     let bind = typeof addr === 'string' ? 'pipe: ' + addr : 'port: ' + addr.port;
-    console.log(`Server Listening on ${bind} process id: ${process.pid}`);
+    console.log(chalk.magenta(`Server Listening on ${bind} process id: ${process.pid}`));
 };
 server.on('error', onError);
 server.on('listening', onListening);
