@@ -1,26 +1,29 @@
 /* eslint-disable */
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+
 import { useDispatch, useSelector } from 'react-redux';
 import * as userActions from '../../store/actions/userActions';
-import { Grid, Row, Column } from 'carbon-components-react';
+import { Grid, Row, Column, } from 'carbon-components-react';
+import cx from 'classnames';
+import history from "../../store/history";
+
+
+
+
 
 const DashBoard = () => {
     const dispatch = useDispatch();
 
     const handleOnLogout = () => {
+        console.log('Logout')
         dispatch(userActions.logout());
     }
     return (
-        <div>
-            <Grid style={{ height: '100vh', paddingLeft: 0 }}>
-                <Row style={{ height: '100vh', textAlign: 'center', padding: 100 }}>
-                    <Column lg={12} >
-                        <h1>WELCOME TO DASHBOARD</h1>
-                        <h4 onClick={handleOnLogout}>Log out</h4>
-                    </Column>
-                </Row>
-            </Grid>
-        </div>
+
+        <React.Fragment>
+            DASHBOARD
+        </React.Fragment>
     )
 }
 

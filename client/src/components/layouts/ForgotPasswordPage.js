@@ -27,15 +27,11 @@ export const Fluid = (TextInputProps) => (
 );
 
 const LoginPage = props => {
-
     const [inputs, setInputs] = useState({
         email: '',
     });
-
     const [resetLinkSuccess, setResetLinkSuccess] = useState(false);
     const LoggedUser = useSelector(state => state);
-
-
 
     const [submitted, setSubmitted] = useState(false);
     const dispatch = useDispatch();

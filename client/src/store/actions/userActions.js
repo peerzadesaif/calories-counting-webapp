@@ -21,7 +21,6 @@ export const logout = (payload) => async dispatch => {
 export const login = ({ email, password, ...rest }, from) => async dispatch => {
     try {
         const { data } = await UserServices.Login({ email, password, ...rest });
-        console.log('data', data)
         if (data && data.status) {
             Cookies.set("CLCNWAHASH", data.data.token, { expires: 1 });
             history.push(from);
@@ -41,7 +40,6 @@ export const login = ({ email, password, ...rest }, from) => async dispatch => {
             }));
         }
     } catch (error) {
-        console.error("error", error);
         dispatch({ type: type.LOGIN_FAILURE, error: 'Something Went Wrong', errorStatus: true })
         dispatch(alertActions.showToast({
             status: true,
@@ -102,6 +100,38 @@ export const resetPassword = (payload) => async dispatch => {
         }
     } catch (error) {
         dispatch({ type: type.RESET_PASSWORD_FAILURE, error: 'Something Went Wrong', errorStatus: true });
+        dispatch(alertActions.showToast({
+            status: true,
+            title: 'Something Went Wrong',
+            kind: 'error'
+        }));
+    }
+}
+
+
+export const addMeals = (payload) => async dispatch => {
+    try {
+        const { data } = await UserServices.AddMeal(payload);
+        console.log('data', data)
+        if (data && data.status) {
+            dispatch({ type: type.ADD_MEALS_SUCCESS, });
+            dispatch(alertActions.showToast({
+                status: true,
+                title: data.message,
+                subtitle: "Please login",
+                kind: 'success'
+            }));
+            history.push('/meal-list')
+        } else {
+            dispatch({ type: type.ADD_MEALS_FAILURE, error: data.message, errorStatus: true });
+            dispatch(alertActions.showToast({
+                status: true,
+                title: data.message,
+                kind: 'error'
+            }));
+        }
+    } catch (error) {
+        dispatch({ type: type.ADD_MEALS_FAILURE, error: 'Something Went Wrong', errorStatus: true });
         dispatch(alertActions.showToast({
             status: true,
             title: 'Something Went Wrong',
