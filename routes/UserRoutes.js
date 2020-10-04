@@ -1,18 +1,19 @@
 const express = require("express");
 const router = express.Router();
 import UsersController from "../app/controllers/UsersController";
+import MealsController from "../app/controllers/MealsController";
 
 router.route("/user/login").post(UsersController.Login);
 
 router.route("/user/register").post(UsersController.Register);
 
 router.route("/user/meals")
-    .get(UsersController.GetAllMeals)
-    .post(UsersController.AddMeal);
+    .get(MealsController.GetAllMeals)
+    .post(MealsController.AddMeal);
 
 router.route("/user/meals/:id")
-    .get(UsersController.GetSingleMeal)
-    .put(UsersController.UpdateMeal);
+    .get(MealsController.GetSingleMeal)
+    .put(MealsController.UpdateMeal);
 
 router.route("/password/reset").post(UsersController.ResetPassword);
 
