@@ -35,32 +35,18 @@ export const CUSTOM_RESPONSE_MESSAGES = {
     EMPTY_PARAMS: "Please provide the required params with the request",
     USER_EXISTS: "User already exists, please login",
     USER_NOT_FOUND: "User not found with the provided information",
-    OTP_SENT: "OTP sent successfully",
-    OTP_EXPIRED: "OTP expired, please try again",
-    OTP_INVALID: "Invalid OTP",
     TOKEN_INVALID: "Invalid token",
-    FILE_UPLOADED: "File uploaded",
-    FILTER_INVALID: "Invalid filter",
-    SESSION_INVALID: "Invalid session",
-    COUNTRY_CODE_INVALID: "Invalid Country Code",
-    IMAGE_UPLOAD_SUCCESSFUL: "Image uploaded successfully",
-    ADD_SUCCESS: "Data inserted successfully",
     GET_SUCCESS: "Data retrieved successfully",
     EDIT_SUCCESS: "Data updated successfully",
     DELETE_SUCCESS: "Data deleted successfully",
+    ADDED_SUCCESS: "Data inserted successfully",
     DATA_NOT_FOUND: "No data found",
     REGISTER_SUCCESS: "Registration successful",
     LOGIN_SUCCESS: "Login successful",
-    BOOKING_CONFIRMED: "Booking confirmed",
-    BOOKING_NOT_CONFIRMED: "Booking not confirmed",
-    ALREADY_LIKED: "You have already liked this movie",
-    INVALID_PROMO: "Invalid promo code",
     TRANSACTION_ERROR: "Error during transaction",
     TRANSACTION_SUCCESS: "Transaction completed successfully",
     TRANSACTION_CANCEL_SUCCESS: "Transaction cancelled successfully",
     PASSWORD_INVALID: "Invalid password",
-    OTP_ERROR: "Error sending OTP",
-    LINK_SENT_SUCCESS: "Reset password link has been sent successfully",
 
 };
 
@@ -77,7 +63,13 @@ export const VALIDATION_MESSAGES = {
     EMPTY_ORG_NAME: "Please enter an organization name",
     EMPTY_FILES: "Please add a file",
     NAME: "Please enter a valid name",
-    OTP: "Please enter your 4-digit OTP",
+
+    EMPTY_MEAL: "Please enter a meal",
+    EMPTY_MEAL_CALORIES: "Please enter a calories",
+    EMPTY_MEAL_DATE: "Please select a date",
+
+
+
 };
 
 

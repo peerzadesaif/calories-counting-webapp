@@ -11,9 +11,10 @@ router.route("/user/meals")
     .get(MealsController.GetAllMeals)
     .post(MealsController.AddMeal);
 
-router.route("/user/meals/:id")
+router.route("/user/meals/:_id")
     .get(MealsController.GetSingleMeal)
-    .put(MealsController.UpdateMeal);
+    .put(MealsController.UpdateMeal)
+    .delete(MealsController.DeleteMeal);
 
 router.route("/password/reset").post(UsersController.ResetPassword);
 

@@ -6,8 +6,9 @@ var MealSchema = new Schema({
 
     mealName: String,
     mealDescription: String,
-    text: String,
+    mealText: String,
     calories: Number,
+    date: Date,
 
     created_at: Date,
     updated_at: Date
