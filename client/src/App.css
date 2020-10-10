@@ -47,3 +47,16 @@
   opacity: 0.01;
   transition: opacity 300ms ease-in;
 }
+
+.custom-radio-red .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance::before{
+  background: red
+}
+.custom-radio-red .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance{
+  border-color: red
+}
+.custom-radio-green .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance::before{
+  background: green
+}
+.custom-radio-green .bx--radio-button:checked + .bx--radio-button__label .bx--radio-button__appearance{
+  border-color: green
+}

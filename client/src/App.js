@@ -15,10 +15,14 @@ import './App.css';
 const whiteList = ["/register", '/login', '/reset-password']; // no redirect whitelist
 
 const App = () => {
+  const [showHeader, setShowHeader] = useState(false);
+
   useEffect(() => {
+    setShowHeader(!whiteList.includes(`${window.location.pathname}`))
     // Update the document title using the browser API
     history.listen((location, action) => {
       whiteList.includes(`${location.pathname}`) ? undefined : !Cookies.get("CLCNWAHASH") ? history.push('/') : undefined
+      setShowHeader(!whiteList.includes(`${location.pathname}`))
     });
   });
 
@@ -26,7 +30,7 @@ const App = () => {
     <React.Fragment>
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <AppRouter />
+          <AppRouter whiteList={whiteList} showHeader={showHeader} />
         </ConnectedRouter>
       </Provider>
     </React.Fragment>

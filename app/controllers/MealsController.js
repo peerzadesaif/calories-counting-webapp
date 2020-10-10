@@ -80,9 +80,9 @@ module.exports.UpdateMeal = async (req, res) => {
       if (!meals) {
         return res.status(statusTypes.FORBIDDEN).json(ResponseService.sendResponse(statusTypes.FORBIDDEN, constant.CUSTOM_RESPONSE_MESSAGES.DATA_NOT_FOUND, null, {}));
       } else {
-        meal.mealText = reqbody.meal_text;
-        meal.calories = reqbody.calories;
-        meal.date = reqbody.date;
+        meals.mealText = reqbody.meal_text;
+        meals.calories = reqbody.calories;
+        meals.date = reqbody.date;
         const _meals = await meals.save();
 
         return res.status(statusTypes.SUCCESS).json(ResponseService.sendResponse(statusTypes.SUCCESS, constant.CUSTOM_RESPONSE_MESSAGES.EDIT_SUCCESS, null, _meals))

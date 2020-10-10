@@ -55,7 +55,7 @@ const LoginPage = props => {
 
 
     const handleSubmit = async (e) => {
-        setSubmitted(false);
+        setSubmitted(true);
         e.preventDefault();
         if (email && password) {
             // get return url from location state or default to home page
@@ -162,7 +162,7 @@ const LoginPage = props => {
                                                     {...inputProps.FirstNameInputProps({
                                                         name: 'password',
                                                         _name: 'password',
-                                                        placeholder: 'Doe'
+                                                        placeholder: '*******'
                                                     })}
                                                     value={password || ''}
                                                     invalid={submitted && !password}
