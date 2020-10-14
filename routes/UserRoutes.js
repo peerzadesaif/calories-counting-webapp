@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+
+const adminMiddleware = require("../middleware/adminMiddleware");
+
 import UsersController from "../app/controllers/UsersController";
 import MealsController from "../app/controllers/MealsController";
 
@@ -8,13 +11,13 @@ router.route("/user/login").post(UsersController.Login);
 router.route("/user/register").post(UsersController.Register);
 
 router.route("/user/meals")
-    .get(MealsController.GetAllMeals)
-    .post(MealsController.AddMeal);
+    .get(adminMiddleware.authenticate, MealsController.GetAllMeals)
+    .post(adminMiddleware.authenticate, MealsController.AddMeal);
 
 router.route("/user/meals/:_id")
-    .get(MealsController.GetSingleMeal)
-    .put(MealsController.UpdateMeal)
-    .delete(MealsController.DeleteMeal);
+    .get(adminMiddleware.authenticate, MealsController.GetSingleMeal)
+    .put(adminMiddleware.authenticate, MealsController.UpdateMeal)
+    .delete(adminMiddleware.authenticate, MealsController.DeleteMeal);
 
 router.route("/password/reset").post(UsersController.ResetPassword);
 

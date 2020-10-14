@@ -12,8 +12,9 @@ import * as constant from "../helpers/constant";
 
 
 module.exports.GetAllMeals = async (req, res) => {
+  const meta = req.meta;
   try {
-    const meals = await Meal.find({});
+    const meals = await Meal.find({ owner: meta.clientId });
     return res.status(statusTypes.SUCCESS).json(ResponseService.sendResponse(statusTypes.SUCCESS, constant.CUSTOM_RESPONSE_MESSAGES.GET_SUCCESS, null, meals))
   } catch (error) {
     console.error('GetAllMeals Error: ', error);
@@ -23,6 +24,7 @@ module.exports.GetAllMeals = async (req, res) => {
 };
 
 module.exports.AddMeal = async (req, res) => {
+  const meta = req.meta;
   try {
     let reqbody = req.body
     if (!req.body) {
@@ -35,6 +37,7 @@ module.exports.AddMeal = async (req, res) => {
       return res.status(statusTypes.BAD_REQUEST).json(ResponseService.sendResponse(statusTypes.BAD_REQUEST, constant.VALIDATION_MESSAGES.EMPTY_MEAL_DATE, null, {}))
     } else {
       let mealModel = new Meal();
+      mealModel.owner = meta.clientId;
       mealModel.mealText = reqbody.meal_text;
       mealModel.calories = reqbody.calories;
       mealModel.date = reqbody.date;
@@ -50,13 +53,14 @@ module.exports.AddMeal = async (req, res) => {
 };
 
 module.exports.GetSingleMeal = async (req, res) => {
+  const meta = req.meta;
   try {
     if (!req.params) {
       return res.status(statusTypes.BAD_REQUEST).json(ResponseService.sendResponse(statusTypes.BAD_REQUEST, constant.CUSTOM_RESPONSE_MESSAGES.EMPTY_PARAMS, null, {}))
     } else if (!req.params._id) {
       return res.status(statusTypes.BAD_REQUEST).json(ResponseService.sendResponse(statusTypes.BAD_REQUEST, constant.CUSTOM_RESPONSE_MESSAGES.EMPTY_PARAMS, null, {}))
     } else {
-      const meals = await Meal.findOne({ _id: req.params._id });
+      const meals = await Meal.findOne({ _id: req.params._id, owner: meta.clientId });
       return res.status(statusTypes.SUCCESS).json(ResponseService.sendResponse(statusTypes.SUCCESS, constant.CUSTOM_RESPONSE_MESSAGES.GET_SUCCESS, null, meals))
     }
   } catch (error) {
@@ -67,6 +71,7 @@ module.exports.GetSingleMeal = async (req, res) => {
 };
 
 module.exports.UpdateMeal = async (req, res) => {
+  const meta = req.meta;
   try {
     let reqbody = req.body;
     if (!req.params) {
@@ -76,7 +81,7 @@ module.exports.UpdateMeal = async (req, res) => {
     } else if (req.body.mealText) {
       return res.status(statusTypes.BAD_REQUEST).json(ResponseService.sendResponse(statusTypes.BAD_REQUEST, constant.CUSTOM_RESPONSE_MESSAGES.EMPTY_PARAMS, null, {}))
     } else {
-      const meals = await Meal.findOne({ _id: req.params._id });
+      const meals = await Meal.findOne({ _id: req.params._id, owner: meta.clientId });
       if (!meals) {
         return res.status(statusTypes.FORBIDDEN).json(ResponseService.sendResponse(statusTypes.FORBIDDEN, constant.CUSTOM_RESPONSE_MESSAGES.DATA_NOT_FOUND, null, {}));
       } else {
@@ -98,13 +103,14 @@ module.exports.UpdateMeal = async (req, res) => {
 
 
 module.exports.DeleteMeal = async (req, res) => {
+  const meta = req.meta;
   try {
     if (!req.params) {
       return res.status(statusTypes.BAD_REQUEST).json(ResponseService.sendResponse(statusTypes.BAD_REQUEST, constant.CUSTOM_RESPONSE_MESSAGES.EMPTY_PARAMS, null, {}))
     } else if (!req.params._id) {
       return res.status(statusTypes.BAD_REQUEST).json(ResponseService.sendResponse(statusTypes.BAD_REQUEST, constant.CUSTOM_RESPONSE_MESSAGES.EMPTY_PARAMS, null, {}))
     } else {
-      const meals = await Meal.findOneAndRemove({ _id: req.params._id });
+      const meals = await Meal.findOneAndRemove({ _id: req.params._id, owner: meta.clientId });
       return res.status(statusTypes.SUCCESS).json(ResponseService.sendResponse(statusTypes.SUCCESS, constant.CUSTOM_RESPONSE_MESSAGES.DELETE_SUCCESS, null, meals))
     }
   } catch (error) {

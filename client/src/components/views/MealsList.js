@@ -152,7 +152,7 @@ const MealsList = () => {
                                         </TableCell>
 
                                         {Object.keys(row)
-                                            .filter((key) => key !== '_id' && key !== '__v' && key !== 'updated_at' && key !== 'created_at')
+                                            .filter((key) => key !== 'owner' && key !== '_id' && key !== '__v' && key !== 'updated_at' && key !== 'created_at')
                                             .map((key) => {
                                                 return <TableCell key={key}>{row[key]}</TableCell>;
                                             })}
