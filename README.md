@@ -56,6 +56,7 @@ Notes
 
 Folder Structure
 ============================
+```
 .
 Frontend Start
 ├── client
@@ -144,7 +145,7 @@ Backend Start
 ├── mongoClient.js
 ├── terminate.js
 └── server.js
-
+```
 
 ### Description
 ---------------
